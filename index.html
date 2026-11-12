@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#7046dc">
+<title>Lingua — Penerjemah Bahasa</title>
+<style>
+:root{--purple:#7046dc;--deep:#512db5;--pale:#f5f1ff;--ink:#28233b;--muted:#8c879c;--line:#e8e2f2}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#fbfaff,#f0eaff);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink)}
+header{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 max(6vw,22px)}
+.brand{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:800;color:var(--deep)}.logo{width:39px;height:39px;border-radius:13px;background:linear-gradient(135deg,#916df2,#5d36c6);display:grid;place-items:center;color:white}
+.tag{font-size:13px;color:var(--muted)}
+main{width:min(1000px,91%);margin:48px auto}.intro{text-align:center;margin-bottom:30px}.eyebrow{display:inline-block;padding:7px 13px;border-radius:30px;background:#e9e0ff;color:var(--deep);font-size:12px;font-weight:750;letter-spacing:.4px}
+h1{font-size:clamp(30px,5vw,42px);letter-spacing:-1.4px;margin:14px 0 8px}.intro p{margin:0;color:var(--muted);font-size:15px}
+.translator{background:#fff;border:1px solid #eee9f5;border-radius:22px;padding:24px;box-shadow:0 18px 55px #49308b12}
+.languages{display:grid;grid-template-columns:1fr 48px 1fr;gap:12px;align-items:center;margin-bottom:18px}.language{background:#faf9fd;border:1px solid var(--line);border-radius:13px;padding:10px 13px}.language label{display:block;font-size:11px;color:var(--muted);margin-bottom:4px}
+select{width:100%;border:0;background:transparent;font:600 14px inherit;font-size:14px;color:var(--ink);outline:0}
+.swap{height:42px;width:42px;border-radius:13px;border:1px solid #e6def7;background:var(--pale);color:var(--deep);font-size:21px;cursor:pointer}.swap:hover{background:#e9e0ff}
+.panels{display:grid;grid-template-columns:1fr 1fr;gap:14px}.panel{border:1px solid var(--line);border-radius:16px;overflow:hidden;min-width:0}
+.panel-head{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;font-size:13px;font-weight:750}.panel-head span:last-child{color:var(--muted);font-weight:500}
+textarea,.result{display:block;width:100%;height:190px;resize:vertical;border:0;outline:0;padding:16px;font:15px/1.65 inherit;font-family:inherit;font-size:15px;line-height:1.65;color:var(--ink);background:white}
+textarea::placeholder,.result.empty{color:#aaa5b7}.result{white-space:pre-wrap;overflow:auto}
+.panel-foot{height:43px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 13px;color:var(--muted);font-size:11px}
+.mini{border:0;background:transparent;color:#6e48d0;font-size:12px;font-weight:750;cursor:pointer;padding:7px}
+.actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:19px}.hint{font-size:12px;color:var(--muted);line-height:1.5}
+.primary{border:0;border-radius:13px;padding:14px 24px;background:linear-gradient(135deg,#8058eb,#5d37c5);color:#fff;font-size:14px;font-weight:750;cursor:pointer;min-width:165px;box-shadow:0 8px 18px #7046dc38}.primary:disabled{opacity:.65;cursor:wait}
+.status{min-height:22px;margin-top:12px;font-size:12px;color:var(--muted)}.status.error{color:#c04461}.status.ok{color:#26845b}
+.note{margin-top:15px;padding:11px 13px;border-radius:11px;background:#faf8ff;color:#817b91;font-size:11px;line-height:1.5}
+footer{text-align:center;color:#9994a8;font-size:12px;padding:0 18px 28px}
+@media(max-width:650px){header{height:65px}.tag{display:none}main{margin:30px auto}.translator{padding:15px;border-radius:18px}.languages{grid-template-columns:1fr 40px 1fr;gap:7px}.language{padding:9px 8px}.swap{width:38px;height:38px}.panels{grid-template-columns:1fr}.panels textarea,.panels .result{height:150px}.actions{flex-direction:column-reverse;align-items:stretch}.primary{width:100%}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo">文</div>Lingua</div><div class="tag">Terjemahkan kata, hubungkan dunia.</div></header>
+<main>
+<section class="intro"><span class="eyebrow">PENERJEMAH BAHASA ONLINE</span><h1>Bahasa bukan lagi batas.</h1><p>Terjemahkan teks dengan mudah dan cepat bersama Lingua.</p></section>
+<section class="translator">
+<div class="languages">
+ <div class="language"><label for="from">Dari</label><select id="from"><option value="id" selected>🇮🇩 Indonesia</option><option value="en">🇬🇧 Inggris</option><option value="ja">🇯🇵 Jepang</option><option value="ko">🇰🇷 Korea</option><option value="zh-CN">🇨🇳 Mandarin</option></select></div>
+ <button class="swap" id="swap" title="Tukar bahasa" aria-label="Tukar bahasa">⇄</button>
+ <div class="language"><label for="to">Ke</label><select id="to"><option value="id">🇮🇩 Indonesia</option><option value="en" selected>🇬🇧 Inggris</option><option value="ja">🇯🇵 Jepang</option><option value="ko">🇰🇷 Korea</option><option value="zh-CN">🇨🇳 Mandarin</option></select></div>
+</div>
+<div class="panels">
+ <div class="panel"><div class="panel-head"><span>Teks sumber</span><span id="fromName">Indonesia</span></div><textarea id="source" maxlength="5000" placeholder="Ketik atau tempel teks yang ingin diterjemahkan..."></textarea><div class="panel-foot"><button class="mini" id="clear">Hapus teks</button><span id="count">0 / 5.000</span></div></div>
+ <div class="panel"><div class="panel-head"><span>Hasil terjemahan</span><span id="toName">Inggris</span></div><div class="result empty" id="result" aria-live="polite">Hasil terjemahan akan muncul di sini.</div><div class="panel-foot"><span>Lingua Translate</span><button class="mini" id="copy">▢ Salin hasil</button></div></div>
+</div>
+<div class="actions"><div class="hint">✦ Periksa kembali hasil terjemahan untuk konteks yang penting.</div><button class="primary" id="go">Terjemahkan&nbsp; →</button></div>
+<div class="status" id="status" role="status"></div>
+<div class="note">Lingua membutuhkan koneksi internet untuk menerjemahkan. Jika layanan sedang tidak tersedia atau preview memblokir koneksi, buka file ini langsung melalui browser.</div>
+</section>
+</main>
+<footer>© 2026 Lingua · Terjemahan praktis untuk semua.</footer>
+<script>
+const el=id=>document.getElementById(id),from=el('from'),to=el('to'),source=el('source'),result=el('result'),status=el('status'),go=el('go');
+const names={id:'Indonesia',en:'Inggris',ja:'Jepang',ko:'Korea','zh-CN':'Mandarin'};
+function labels(){el('fromName').textContent=names[from.value];el('toName').textContent=names[to.value]}
+from.onchange=to.onchange=labels;
+source.addEventListener('input',()=>el('count').textContent=source.value.length.toLocaleString('id-ID')+' / 5.000');
+el('swap').onclick=()=>{let a=from.value;from.value=to.value;to.value=a;let old=source.value;source.value=result.classList.contains('empty')?'':result.textContent;result.textContent=old||'Hasil terjemahan akan muncul di sini.';result.classList.toggle('empty',!old);el('count').textContent=source.value.length.toLocaleString('id-ID')+' / 5.000';labels();status.className='status';status.textContent='Bahasa berhasil ditukar.'};
+el('clear').onclick=()=>{source.value='';el('count').textContent='0 / 5.000';source.focus()};
+el('copy').onclick=async()=>{if(result.classList.contains('empty')||!result.textContent.trim()){status.className='status error';status.textContent='Belum ada hasil untuk disalin.';return}try{await navigator.clipboard.writeText(result.textContent);status.className='status ok';status.textContent='Hasil terjemahan berhasil disalin.'}catch(e){status.className='status error';status.textContent='Clipboard tidak tersedia di browser ini. Silakan salin hasil secara manual.'}};
+async function googleTranslate(text,sl,tl){
+ const url='https://translate.googleapis.com/translate_a/single?client=gtx&sl='+encodeURIComponent(sl)+'&tl='+encodeURIComponent(tl)+'&dt=t&q='+encodeURIComponent(text);
+ const r=await fetch(url,{method:'GET'});if(!r.ok)throw Error('Layanan Google Translate tidak merespons.');const data=await r.json();
+ const translated=Array.isArray(data?.[0])?data[0].map(x=>x?.[0]||'').join(''):'';if(!translated)throw Error('Hasil terjemahan kosong.');return translated;
+}
+async function myMemoryTranslate(text,sl,tl){
+ const url='https://api.mymemory.translated.net/get?q='+encodeURIComponent(text)+'&langpair='+encodeURIComponent(sl+'|'+tl);
+ const r=await fetch(url);if(!r.ok)throw Error('Layanan cadangan tidak merespons.');const d=await r.json();
+ if(!d?.responseData?.translatedText||Number(d.responseStatus)!==200)throw Error(d?.responseDetails||'Layanan cadangan tidak dapat menerjemahkan teks ini.');return d.responseData.translatedText;
+}
+go.onclick=async()=>{
+ const text=source.value.trim();if(!text){status.className='status error';status.textContent='Masukkan teks yang ingin diterjemahkan terlebih dahulu.';source.focus();return}
+ if(from.value===to.value){status.className='status error';status.textContent='Pilih bahasa asal dan tujuan yang berbeda.';return}
+ go.disabled=true;go.textContent='Menerjemahkan...';status.className='status';status.textContent='Menghubungkan ke layanan penerjemah...';
+ try{
+  let translated;
+  try{translated=await googleTranslate(text,from.value,to.value)}
+  catch(firstError){status.textContent='Mencoba layanan penerjemah cadangan...';translated=await myMemoryTranslate(text,from.value,to.value)}
+  result.textContent=translated;result.classList.remove('empty');status.className='status ok';status.textContent='Terjemahan selesai!';
+ }catch(err){status.className='status error';status.textContent='Terjemahan gagal dimuat. Coba buka file langsung di Chrome/Safari dan pastikan internet aktif. ('+(err.message||'Koneksi gagal')+')'}
+ finally{go.disabled=false;go.innerHTML='Terjemahkan&nbsp; →'}
+};
+</script>
+</body></html>
